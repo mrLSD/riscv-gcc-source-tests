@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 .pioenvs
 .piolibdeps
 .pio
 .vscode
-=======
 # Prerequisites
 *.d
 
@@ -56,4 +54,3 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
->>>>>>> d2e6dc0f4d5db46ad88cab5b18140b1570606ad3
