@@ -1,0 +1,57 @@
+# !!! WARNING !!! AUTO-GENERATED FILE, PLEASE DO NOT MODIFY IT AND USE
+# https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+#
+# If you need to override existing CMake configuration or add extra,
+# please create `CMakeListsUser.txt` in the root of project.
+# The `CMakeListsUser.txt` will not be overwritten by PlatformIO.
+
+
+set(CMAKE_CONFIGURATION_TYPES "sipeed-maixduino" CACHE STRING "" FORCE)
+
+set(PLATFORMIO_CMD "$ENV{HOME}/.platformio/penv/bin/pio")
+
+SET(CMAKE_C_COMPILER "$ENV{HOME}/.platformio/packages/toolchain-kendryte210/bin/riscv64-unknown-elf-gcc")
+SET(CMAKE_CXX_COMPILER "$ENV{HOME}/.platformio/packages/toolchain-kendryte210/bin/riscv64-unknown-elf-g++")
+SET(CMAKE_CXX_FLAGS_DISTRIBUTION "-std=gnu++17 -mcmodel=medany -mabi=lp64f -march=rv64imafc -fno-common -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -fno-zero-initialized-in-bss -Os -ggdb -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-but-set-variable -Wno-error=unused-variable -Wno-error=deprecated-declarations -Wno-multichar -Wextra -Werror=frame-larger-than=65536 -Wno-unused-parameter -Wno-sign-compare -Wno-error=missing-braces -Wno-error=return-type -Wno-error=pointer-sign -Wno-missing-braces -Wno-strict-aliasing -Wno-implicit-fallthrough -Wno-missing-field-initializers -Wno-int-to-pointer-cast -Wno-error=comment -Wno-error=logical-not-parentheses -Wno-error=duplicate-decl-specifier -Wno-error=parentheses -Wno-error=maybe-uninitialized")
+SET(CMAKE_C_FLAGS_DISTRIBUTION "-std=gnu11 -Wno-pointer-to-int-cast -Wno-old-style-declaration -mcmodel=medany -mabi=lp64f -march=rv64imafc -fno-common -ffunction-sections -fdata-sections -fstrict-volatile-bitfields -fno-zero-initialized-in-bss -Os -ggdb -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-but-set-variable -Wno-error=unused-variable -Wno-error=deprecated-declarations -Wno-multichar -Wextra -Werror=frame-larger-than=65536 -Wno-unused-parameter -Wno-sign-compare -Wno-error=missing-braces -Wno-error=return-type -Wno-error=pointer-sign -Wno-missing-braces -Wno-strict-aliasing -Wno-implicit-fallthrough -Wno-missing-field-initializers -Wno-int-to-pointer-cast -Wno-error=comment -Wno-error=logical-not-parentheses -Wno-error=duplicate-decl-specifier -Wno-error=parentheses -Wno-error=maybe-uninitialized")
+
+SET(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+
+if (CMAKE_BUILD_TYPE MATCHES "sipeed-maixduino")
+    add_definitions(-D'PLATFORMIO=40100')
+    add_definitions(-D'CONFIG_LOG_ENABLE')
+    add_definitions(-D'CONFIG_LOG_LEVEL=LOG_INFO')
+    add_definitions(-D'DEBUG=1')
+    add_definitions(-D'__riscv64')
+    add_definitions(-D'K210')
+    add_definitions(-D'ARCH=K210')
+    add_definitions(-D'F_CPU=400000000L')
+    add_definitions(-D'NNCASE_TARGET=k210')
+    add_definitions(-D'TCB_SPAN_NO_EXCEPTIONS')
+    add_definitions(-D'TCB_SPAN_NO_CONTRACT_CHECKING')
+
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/include")
+    include_directories("${CMAKE_CURRENT_LIST_DIR}/src")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/bsp")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/bsp/include")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/drivers")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/drivers/include")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/freertos")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/freertos/include")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/freertos/portable")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/freertos/conf")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/utils/include")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/nncase")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/nncase/include")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/lib/nncase/runtime")
+    include_directories("$ENV{HOME}/.platformio/packages/framework-kendryte-standalone-sdk/third_party/xtl/include")
+    include_directories("$ENV{HOME}/.platformio/packages/toolchain-kendryte210/riscv64-unknown-elf/include")
+    include_directories("$ENV{HOME}/.platformio/packages/toolchain-kendryte210/riscv64-unknown-elf/include/c++/8.2.0")
+    include_directories("$ENV{HOME}/.platformio/packages/toolchain-kendryte210/riscv64-unknown-elf/include/c++/8.2.0/riscv64-unknown-elf")
+    include_directories("$ENV{HOME}/.platformio/packages/toolchain-kendryte210/lib/gcc/riscv64-unknown-elf/8.2.0/include-fixed")
+    include_directories("$ENV{HOME}/.platformio/packages/toolchain-kendryte210/lib/gcc/riscv64-unknown-elf/8.2.0/include")
+    include_directories("$ENV{HOME}/.platformio/packages/tool-unity")
+endif()
+
+FILE(GLOB_RECURSE SRC_LIST "${CMAKE_CURRENT_LIST_DIR}/src/*.*" "${CMAKE_CURRENT_LIST_DIR}/lib/*.*" "${CMAKE_CURRENT_LIST_DIR}/.pio/libdeps/sipeed-maixduino/*.*")

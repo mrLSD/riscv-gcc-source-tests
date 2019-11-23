@@ -1,6 +1,6 @@
-#include <stdio.h>	
+#include <stdio.h>
 #include <assert.h>
-#include "bsp.h"	
+#include "bsp.h"
 
 #define ADD    "add   %0, %1, %2"
 #define DIV    "div    %0, %1, %2"
@@ -97,6 +97,8 @@ void mul32() {
 
 void mulh32() {
     printf("\n== MULH32\n");
+    ASM32(MULH, 10, 20, 0, "mulh");
+    ASM32(MULH, 0x10000, 0xFFFFF, 0xF, "mulh");
 }
 
 void mulhu32() {
@@ -109,7 +111,7 @@ void mulhsu32() {
 
 void mul64() {
     printf("\n== MUL64\n");
-    ASM32(MUL, 10, 20, 200, "mul");
+    ASM64(MUL, 10, 20, 200, "mul");
 }
 
 void mulw64() {
@@ -139,7 +141,6 @@ void div32() {
     ASM32(DIV, 1, -3, 0, "div");
     ASM32(DIV, 4, -2, -2, "div");
     ASM32(DIV, -4, 2, -2, "div");
-    ASM32(DIV, -4, 2, -2, "div");
     ASM32(DIV, -4, -2, 2, "div");
     ASM32(DIV, 0, 2, 0, "div");
     ASM32(DIV, 2, 0, -1, "div");
@@ -149,6 +150,21 @@ void div32() {
 
 void divu32() {
     printf("\n== DIVU32\n");
+    ASM32(DIVU, 4, 2, 2, "divu");
+    ASM32(DIVU, 5, 2, 2, "divu");
+    ASM32(DIVU, 6, 2, 3, "divu");
+    ASM32(DIVU, 15, 4, 3, "divu");
+    ASM32(DIVU, 1, 3, 0, "divu");
+    ASM32(DIVU, -1, 3, 0x55555555, "divu");
+    ASM32(DIVU, 1, -3, 0, "divu");
+    ASM32(DIVU, 4, -2, 0, "divu");
+    ASM32(DIVU, -4, 2, 2, "divu");
+    ASM32(DIVU, -4, -2, 2, "divu");
+    ASM32(DIVU, 0, 2, 0, "divu");
+    int32_t maxUnsigned = 0x7FFFFFFF;
+    ASM32(DIVU, 2, 0, maxUnsigned, "divu");
+    int32_t minSigned = 0x80000000;
+    ASM32(DIVU, minSigned, -1, minSigned, "divu");
 }
 
 void div64() {
@@ -191,10 +207,10 @@ void remuw64() {
     printf("\n== REMUW64\n");
 }
 
-int main()	
-{	
-    uint64_t core = current_coreid();	
-    printf("Core %ld Hello world\n\n", core);	
+int main()
+{
+    uint64_t core = current_coreid();
+    printf("Core %ld Hello world\n\n", core);
 
     add32();
 
@@ -227,5 +243,5 @@ int main()
     mulhu64();
     mulhsu64();
 
-    while(1);	
+    while(1);
 }

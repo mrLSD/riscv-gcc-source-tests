@@ -4,6 +4,8 @@
 .vscode
 # Prerequisites
 *.d
+hello*
+.idea/
 
 # Object files
 *.o
