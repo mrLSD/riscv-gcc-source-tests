@@ -6,6 +6,7 @@
 *.d
 hello*
 .idea/
+!src/*
 
 # Object files
 *.o
