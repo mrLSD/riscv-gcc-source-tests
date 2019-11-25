@@ -13,6 +13,7 @@
 #define MUL    "mul    %0, %1, %2"
 #define MULH   "mulh   %0, %1, %2"
 #define MULHSU "mulhsu %0, %1, %2"
+#define MULHU  "mulhu %0, %1, %2"
 #define MULW   "mulw   %0, %1, %2"
 
 #define ASM32(instr, val3, val1, val2, msg) ({ \
@@ -109,10 +110,34 @@ void mulh32() {
 
 void mulhu32() {
     printf("\n== MULHU32\n");
+    ASM32(MULHU, 0x00000000, 0x00000000, 0x00000000, "mulhu");
+    ASM32(MULHU, 0x00000000, 0x00000001, 0x00000001, "mulhu");
+    ASM32(MULHU, 0x00000000, 0x00000003, 0x00000007, "mulhu");
+    ASM32(MULHU, 0x00000000, 0x00000000, 0xffff8000, "mulhu");
+    ASM32(MULHU, 0x00000000, 0x80000000, 0x00000000, "mulhu");
+//    ASM32(MULHU,  0x7fffc000, 0x80000000, 0xffff8000, "mulhu");
+//    ASM32(MULHU,  0x0001fefe, 0xaaaaaaab, 0x0002fe7d, "mulhu");
+//    ASM32(MULHU,  0x0001fefe, 0x0002fe7d, 0xaaaaaaab, "mulhu");
+//    ASM32(MULHU,  0xfe010000, 0xff000000, 0xff000000, "mulhu");
+    ASM32(MULHU, 0xfffffffe, 0xffffffff, 0xffffffff, "mulhu");
+    ASM32(MULHU, 0x00000000, 0xffffffff, 0x00000001, "mulhu");
+    ASM32(MULHU, 0x00000000, 0x00000001, 0xffffffff, "mulhu");
 }
 
 void mulhsu32() {
     printf("\n== MULHSU32\n");
+    ASM32(MULHSU, 0x00000000, 0x00000000, 0x00000000, "mulhsu");
+    ASM32(MULHSU, 0x00000000, 0x00000001, 0x00000001, "mulhsu");
+    ASM32(MULHSU, 0x00000000, 0x00000003, 0x00000007, "mulhsu");
+    ASM32(MULHSU, 0x00000000, 0x00000000, 0xffff8000, "mulhsu");
+    ASM32(MULHSU, 0x00000000, 0x80000000, 0x00000000, "mulhsu");
+//    ASM32(MULHSU, 0x80004000, 0x80000000, 0xffff8000, "mulhsu");
+//    ASM32(MULHSU, 0xffff0081, 0xaaaaaaab, 0x0002fe7d, "mulhsu");
+//    ASM32(MULHSU, 0x0001fefe, 0x0002fe7d, 0xaaaaaaab, "mulhsu");
+//    ASM32(MULHSU, 0xff010000, 0xff000000, 0xff000000, "mulhsu");
+    ASM32(MULHSU, 0xffffffff, 0xffffffff, 0xffffffff, "mulhsu");
+    ASM32(MULHSU, 0xffffffff, 0xffffffff, 0x00000001, "mulhsu");
+    ASM32(MULHSU, 0x00000000, 0x00000001, 0xffffffff, "mulhsu");
 }
 
 void mul64() {
@@ -135,7 +160,6 @@ void mulw64() {
     ASM64(MULW, 0x00000000, 0x00000000, 0x00000000, "mulw");
     ASM64(MULW, 0x00000001, 0x00000001, 0x00000001, "mulw");
     ASM64(MULW, 0x00000015, 0x00000003, 0x00000007, "mulw");
-
     ASM64(MULW, 0x0000000000000000, 0x0000000000000000, 0xffffffffffff8000, "mulw");
     ASM64(MULW, 0x0000000000000000, 0xffffffff80000000, 0x00000000, "mulw");
     ASM64(MULW, 0x0000000000000000, 0xffffffff80000000, 0xffffffffffff8000, "mulw");
@@ -154,10 +178,24 @@ void mulh64() {
 
 void mulhu64() {
     printf("\n== MULHU64\n");
+    ASM64(MULHU, 0x00000000, 0x00000000, 0x00000000, "mulhu");
+    ASM64(MULHU, 0x00000000, 0x00000001, 0x00000001, "mulhu");
+    ASM64(MULHU, 0x00000000, 0x00000003, 0x00000007, "mulhu");
+    ASM64(MULHU, 0x0000000000000000, 0x0000000000000000, 0xffffffffffff8000, "mulhu");
+    ASM64(MULHU, 0x0000000000000000, 0xffffffff80000000, 0x00000000, "mulhu");
+    ASM64(MULHU, 0xffffffff7fff8000, 0xffffffff80000000, 0xffffffffffff8000, "mulhu");
+    ASM64(MULHU, 0x000000000001fefe, 0xaaaaaaaaaaaaaaab, 0x000000000002fe7d, "mulhu");
+    ASM64(MULHU, 0x000000000001fefe, 0x000000000002fe7d, 0xaaaaaaaaaaaaaaab, "mulhu");
 }
 
 void mulhsu64() {
     printf("\n== MULHSU64\n");
+    ASM64(MULHSU, 0x00000000, 0x00000000, 0x00000000, "mulhsu");
+    ASM64(MULHSU, 0x00000000, 0x00000001, 0x00000001, "mulhsu");
+    ASM64(MULHSU, 0x00000000, 0x00000003, 0x00000007, "mulhsu");
+    ASM64(MULHSU, 0x0000000000000000, 0x0000000000000000, 0xffffffffffff8000, "mulhsu");
+    ASM64(MULHSU, 0x0000000000000000, 0xffffffff80000000, 0x00000000, "mulhsu");
+    ASM64(MULHSU, 0xffffffff80000000, 0xffffffff80000000, 0xffffffffffff8000, "mulhsu");
 }
 
 void div32() {
