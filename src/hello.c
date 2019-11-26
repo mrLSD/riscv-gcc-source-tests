@@ -20,7 +20,7 @@
     asm volatile (instr : "=r" (x) \
        : "r" (y), "r" (z) \
     ); \
-    printf("%s %X, %X, %X\n", msg, x, y, z); \
+    printf("%s\t%X, %X, %X\n", msg, x, y, z); \
     printf("\t%d=%d, %d, %d\n", x, res, y, z); \
     assert(res == x); \
 })
@@ -30,8 +30,8 @@
     asm volatile (instr : "=r" (x) \
        : "r" (y), "r" (z) \
     ); \
-    printf("%s %lX, %lX, %lX\n", msg, x, y, z); \
-    printf("\t%ld, %ld, %ld\n", x, y, z); \
+    printf("%s\t%lX, %lX, %lX\n", msg, x, y, z); \
+    printf("\t%ld, %ld, %ld\n", res, y, z); \
     assert(res == x); \
 })
 
@@ -194,18 +194,53 @@ void divu32() {
 
 void div64() {
     printf("\n== DIV64\n");
+    ASM64(DIV, 3, 20, 6, "div");
+    ASM64(DIV, -3, -20, 6, "div");
+    ASM64(DIV, -3, 20, -6, "div");
+    ASM64(DIV, 3, -20, -6, "div");
+    ASM64(DIV, -1 << 63, -1 << 63, 1, "div");
+    ASM64(DIV, -1 << 63, -1 << 63, -1, "div");
+    ASM64(DIV, -1, -1 << 63, 0, "div");
+    ASM64(DIV, -1, 1, 0, "div");
+    ASM64(DIV, -1, 0, 0, "div");
 }
 
 void divu64() {
     printf("\n== DIVU64\n");
+    ASM64(DIVU, 3, 20, 6, "divu");
+    ASM64(DIVU, 3074457345618258599, -20, 6, "divu");
+    ASM64(DIVU, 0, 20, -6, "divu");
+    ASM64(DIVU, 0, -20, -6, "divu");
+    ASM64(DIVU, -1 << 63, -1 << 63, 1, "divu");
+    ASM64(DIVU, 0, -1 << 63, -1, "divu");
+    ASM64(DIVU, -1, -1 << 63, 0, "divu");
+    ASM64(DIVU, -1, 1, 0, "divu");
+    ASM64(DIVU, -1, 0, 0, "divu");
 }
 
 void divw64() {
     printf("\n== DIVW64\n");
+    ASM64(DIVW, 3, 20, 6, "divw");
+    ASM64(DIVW, -3, -20, 6, "divw");
+    ASM64(DIVW, -3, 20, -6, "divw");
+    ASM64(DIVW, 3, -20, -6, "divw");
+    ASM64(DIVW, -1 << 31, -1 << 31, 1, "divw");
+    ASM64(DIVW, -1 << 31, -1 << 31, -1, "divw");
+    ASM64(DIVW, -1, -1 << 31, 0, "divw");
+    ASM64(DIVW, -1, 1, 0, "divw");
+    ASM64(DIVW, -1, 0, 0, "divw");
 }
 
 void divuw64() {
     printf("\n== DIVUW64\n");
+    ASM64(DIVUW, 3, 20, 6, "divuw");
+    ASM64(DIVUW, 0, 20, -6, "divuw");
+    ASM64(DIVUW, 0, -20, -6, "divuw");
+    ASM64(DIVUW, -1 << 31, -1 << 31, 1, "divuw");
+    ASM64(DIVUW, 0, -1 << 31, -1, "divuw");
+    ASM64(DIVUW, -1, -1 << 31, 0, "divuw");
+    ASM64(DIVUW, -1, 1, 0, "divuw");
+    ASM64(DIVUW, -1, 0, 0, "divuw");
 }
 
 void rem32() {
@@ -238,18 +273,57 @@ void remu32() {
 
 void rem64() {
     printf("\n== REM64\n");
+    ASM64(REM, 2, 20, 6, "rem");
+    ASM64(REM, -2, -20, 6, "rem");
+    ASM64(REM, 2, 20, -6, "rem");
+    ASM64(REM, -2, -20, -6, "rem");
+    ASM64(REM, 0, -1 << 63, 1, "rem");
+    ASM64(REM, 0, -1 << 63, -1, "rem");
+    ASM64(REM, -1 << 63, -1 << 63, 0, "rem");
+    ASM64(REM, 1, 1, 0, "rem");
+    ASM64(REM, 0, 0, 0, "rem");
 }
 
 void remu64() {
     printf("\n== REMU64\n");
+    ASM64(REMU, 2, 20, 6, "remu");
+    ASM64(REMU, 2, -20, 6, "remu");
+    ASM64(REMU, 20, 20, -6, "remu");
+    ASM64(REMU, -20, -20, -6, "remu");
+    ASM64(REMU, 0, -1 << 63, 1, "remu");
+    ASM64(REMU, -1 << 63, -1 << 63, -1, "remu");
+    ASM64(REMU, -1 << 63, -1 << 63, 0, "remu");
+    ASM64(REMU, 1, 1, 0, "remu");
+    ASM64(REMU, 0, 0, 0, "remu");
 }
 
 void remw64() {
     printf("\n== REMW64\n");
+    ASM64(REMW, 2, 20, 6, "remw");
+    ASM64(REMW, -2, -20, 6, "remw");
+    ASM64(REMW, 2, 20, -6, "remw");
+    ASM64(REMW, -2, -20, -6, "remw");
+
+    ASM64(REMW, 0, -1 << 31, 1, "remw");
+    ASM64(REMW, 0, -1 << 31, -1, "remw");
+
+    ASM64(REMW, -1 << 31, -1 << 31, 0, "remw");
+    ASM64(REMW, 1, 1, 0, "remw");
+    ASM64(REMW, 0, 0, 0, "remw");
+    ASM64(REMW, 0xfffffffffffff897, 0xfffffffffffff897, 0, "remw");
 }
 
 void remuw64() {
     printf("\n== REMUW64\n");
+    ASM64(REMUW, 2, 20, 6, "remuw");
+    ASM64(REMUW, 2, -20, 6, "remuw");
+    ASM64(REMUW, 20, 20, -6, "remuw");
+    ASM64(REMUW, -20, -20, -6, "remuw");
+    ASM64(REMUW, 0, -1 << 31, 1, "remuw");
+    ASM64(REMUW, -1 << 31, -1 << 31, -1, "remuw");
+    ASM64(REMUW, -1 << 31, -1 << 31, 0, "remuw");
+    ASM64(REMUW, 1, 1, 0, "remuw");
+    ASM64(REMUW, 0, 0, 0, "remuw");
 }
 
 int main() {
