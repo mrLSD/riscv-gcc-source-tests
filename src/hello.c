@@ -118,10 +118,27 @@ void mulhsu32() {
 void mul64() {
     printf("\n== MUL64\n");
     ASM64(MUL, 200, 10, 20, "mul");
+    ASM64(MUL, 0x0000000000001200, 0x0000000000007e00, 0x6db6db6db6db6db7, "mul");
+    ASM64(MUL, 0x0000000000001240, 0x0000000000007fc0, 0x6db6db6db6db6db7, "mul");
+    ASM64(MUL, 0x00000000, 0x00000000, 0x00000000, "mul");
+    ASM64(MUL, 0x00000001, 0x00000001, 0x00000001, "mul");
+    ASM64(MUL, 0x00000015, 0x00000003, 0x00000007, "mul");
+    ASM64(MUL, 0x0000000000000000, 0x0000000000000000, 0xffffffffffff8000, "mul");
+    ASM64(MUL, 0x0000000000000000, 0xffffffff80000000, 0x00000000, "mul");
+    ASM64(MUL, 0x0000400000000000, 0xffffffff80000000, 0xffffffffffff8000, "mul");
+    ASM64(MUL, 0x000000000000ff7f, 0xaaaaaaaaaaaaaaab, 0x000000000002fe7d, "mul");
+    ASM64(MUL, 0x000000000000ff7f, 0x000000000002fe7d, 0xaaaaaaaaaaaaaaab, "mul");
 }
 
 void mulw64() {
     printf("\n== MULW64\n");
+    ASM64(MULW, 0x00000000, 0x00000000, 0x00000000, "mulw");
+    ASM64(MULW, 0x00000001, 0x00000001, 0x00000001, "mulw");
+    ASM64(MULW, 0x00000015, 0x00000003, 0x00000007, "mulw");
+
+    ASM64(MULW, 0x0000000000000000, 0x0000000000000000, 0xffffffffffff8000, "mulw");
+    ASM64(MULW, 0x0000000000000000, 0xffffffff80000000, 0x00000000, "mulw");
+    ASM64(MULW, 0x0000000000000000, 0xffffffff80000000, 0xffffffffffff8000, "mulw");
 }
 
 void mulh64() {
@@ -129,7 +146,6 @@ void mulh64() {
     ASM64(MULH, 0x00000000, 0x00000000, 0x00000000, "mulh");
     ASM64(MULH, 0x00000000, 0x00000001, 0x00000001, "mulh");
     ASM64(MULH, 0x00000000, 0x00000003, 0x00000007, "mulh");
-
     ASM64(MULH, 0x0000000000000000, 0x0000000000000000, 0xffffffffffff8000, "mulh");
     ASM64(MULH, 0x0000000000000000, 0xffffffff80000000, 0x00000000, "mulh");
     ASM64(MULH, 0x0000000000000000, 0xffffffff80000000, 0xffffffffffff8000, "mulh");
@@ -262,10 +278,8 @@ void remu32() {
     ASM32(REMU, 2, -20, 6, "remu");
     ASM32(REMU, 20, 20, -6, "remu");
     ASM32(REMU, -20, -20, -6, "remu");
-
     ASM32(REMU, 0, -1 << 31, 1, "remu");
     ASM32(REMU, -1 << 31, -1 << 31, -1, "remu");
-
     ASM32(REMU, -1 << 31, -1 << 31, 0, "remu");
     ASM32(REMU, 1, 1, 0, "remu");
     ASM32(REMU, 0, 0, 0, "remu");
